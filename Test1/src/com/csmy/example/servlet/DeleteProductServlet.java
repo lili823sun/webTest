@@ -2,30 +2,29 @@ package com.csmy.example.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.csmy.example.contain.Product;
 import com.csmy.example.dao.ProductDao;
 
-public class GetProductServlet extends HttpServlet {
+public class DeleteProductServlet extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Boolean isLogin = (Boolean) session.getAttribute("isLogin");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		
-		if (isLogin!=null && isLogin) {
-			ProductDao dao = new ProductDao();
-			List<Product> products = dao.findAllProducts();
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("ShowProducts.jsp").forward(request, response);
+		String id = request.getParameter("product_id");
+		
+		ProductDao dao = new ProductDao();
+		boolean result = dao.deleteUserById(id);
+		if (result) {
+			String newUrl = response.encodeRedirectURL("GetProductServlet");
+			response.sendRedirect(newUrl);
 		}else{
-			response.sendRedirect("login.jsp");
+			out.println("É¾³ýÊ§°Ü");
 		}
 	}
 

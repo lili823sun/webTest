@@ -49,7 +49,37 @@
     <servlet-name>GetProductServlet</servlet-name>
     <url-pattern>/GetProductServlet</url-pattern>
   </servlet-mapping>
-    <session-config>
-        <session-timeout>2</session-timeout>
-    </session-config>
+  <servlet>
+    <description></description>
+    <display-name>EditProductServlet</display-name>
+    <servlet-name>EditProductServlet</servlet-name>
+    <servlet-class>com.csmy.example.servlet.EditProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProductServlet</servlet-name>
+    <url-pattern>/EditProductServlet</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>2</session-timeout>
+  </session-config>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProduct</display-name>
+    <servlet-name>UpdateProduct</servlet-name>
+    <servlet-class>com.csmy.example.servlet.UpdateProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProduct</servlet-name>
+    <url-pattern>/UpdateProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteProductServlet</display-name>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <servlet-class>com.csmy.example.servlet.DeleteProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <url-pattern>/DeleteProductServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,6 +1,7 @@
 package com.csmy.example.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.csmy.example.dao.UserDao;
 public class LoginServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		String pwd = request.getParameter("password");
 		
@@ -25,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		User user = dao.findUserByName(username);
 		
 		if(user == null){
-			System.out.println("该用户不存在");
+			out.println("该用户不存在");
 		}else{
 			if(pwd.equals(user.getPassword())){
 				//此处实现记住用户名和密码功能
@@ -39,8 +41,11 @@ public class LoginServlet extends HttpServlet {
 				//此处实现用户登录后才能访问网站其他资源的功能
 				HttpSession session = request.getSession();
 				session.setAttribute("isLogin", true);
+				
+				String newUrl = response.encodeRedirectURL("GetProductServlet");
+				response.sendRedirect(newUrl);
 			}else{
-				System.out.println("密码输入不正确");
+				out.println("密码输入不正确");
 			}
 		}
 	}
